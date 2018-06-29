@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.engining.project</groupId>
+		<artifactId>project-parent</artifactId>
+		<version>3.2-SNAPSHOT</version>
+	</parent>
+	
+	<groupId>net.engining.gateway</groupId>
+	<artifactId>fcgt</artifactId>
+	<name>金融网关</name>
+	<packaging>pom</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	
+	<properties>
+		<pg.version>3.2.0-SNAPSHOT</pg.version>
+		<control.version>1.1.0-SNAPSHOT</control.version>
+		<fcgt.version>0.0.1-SNAPSHOT</fcgt.version>
+	</properties>
+	
+	<modules>
+		<module>fcgt-dict</module>
+		<module>fcgt-flow-trans-meta</module>
+		<module>fcgt-flow-trans</module>
+		<module>fcgt-sv</module>
+	</modules>
+	
+	<dependencyManagement>
+		<dependencies>
+			<!-- spring cloud -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-parent</artifactId>
+				<version>Dalston.SR3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>net.engining.pg</groupId>
+				<artifactId>pg-parent</artifactId>
+				<version>${pg.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>net.engining.control</groupId>
+				<artifactId>control-parent</artifactId>
+				<version>${control.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- <dependency>
+				<groupId>net.engining.gateway</groupId>
+				<artifactId>fcgt-help</artifactId>
+				<version>${fcgt.version}</version>
+			</dependency> -->
+			<dependency>
+				<groupId>net.engining.gateway</groupId>
+				<artifactId>fcgt-dict</artifactId>
+				<version>${fcgt.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.engining.gateway</groupId>
+				<artifactId>fcgt-flow-trans-meta</artifactId>
+				<version>${fcgt.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.engining.gateway</groupId>
+				<artifactId>fcgt-flow-trans</artifactId>
+				<version>${fcgt.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<dependencies>
+		<!-- spring boot log4j -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+	</dependencies>
+</project>

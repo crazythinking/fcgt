@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.engining.gateway.dao.InboundJournalDao">
+    <sql id="inboundJournalColumns">
+        a.ID AS "id",
+        a.CREDIT_APPLY_ID AS "creditApplyId",
+        a.CHANNEL_ID AS "channelId",
+        a.REQUEST_UUID AS "requestUuid",
+        a.PROD_ID AS "prodId",
+        a.APPLY_DATE AS "applyDate",
+        a.APPLY_TYPE AS "applyType",
+        a.APPLY_PRIORITY AS "applyPriority",
+        a.TRANS_DATE AS "transDate",
+        a.TRANS_STATUS AS "transStatus",
+        a.TRANS_RESULT AS "transResult",
+        a.REQUEST_MESSAGE AS "requestMessage",
+        a.RESPONSE_MESSAGE AS "responseMessage",
+        a.REQUEST_TIME AS "requestTime",
+        a.RESPONSE_TIME AS "responseTime",
+        a.RESPONSE_STATUS AS "responseStatus",
+        a.RESPONSE_DESC AS "responseDesc",
+        a.MSG_ID AS "msgId",
+        a.INQUEUE_TIME AS "inqueueTime",
+        a.OUTQUEUE_TIME AS "outqueueTime",
+        a.RETRY_COUNT AS "retryCount"
+    </sql>
+
+    <sql id="inboundJournalJoins">
+    </sql>
+
+    <select id="get" resultType="net.engining.gateway.entity.InboundJournal">
+        SELECT
+        <include refid="inboundJournalColumns"/>
+        FROM CE_INBOUND_JOURNAL a
+        <include refid="inboundJournalJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="net.engining.gateway.entity.InboundJournal">
+        SELECT
+        <include refid="inboundJournalColumns"/>
+        FROM CE_INBOUND_JOURNAL a
+        <include refid="inboundJournalJoins"/>
+    </select>
+
+    <select id="findAllList" resultType="net.engining.gateway.entity.InboundJournal">
+        SELECT
+        <include refid="inboundJournalColumns"/>
+        FROM CE_INBOUND_JOURNAL a
+        <include refid="inboundJournalJoins"/>     
+    </select>
+
+    <insert id="insert">
+        INSERT INTO CE_INBOUND_JOURNAL(
+        ID,
+        CREDIT_APPLY_ID,
+        CHANNEL_ID,
+        REQUEST_UUID,
+        PROD_ID,
+        APPLY_DATE,
+        APPLY_TYPE,
+        APPLY_PRIORITY,
+        TRANS_DATE,
+        TRANS_STATUS,
+        TRANS_RESULT,
+        REQUEST_MESSAGE,
+        RESPONSE_MESSAGE,
+        REQUEST_TIME,
+        RESPONSE_TIME,
+        RESPONSE_STATUS,
+        RESPONSE_DESC,
+        MSG_ID,
+        INQUEUE_TIME,
+        OUTQUEUE_TIME,
+        RETRY_COUNT
+        ) VALUES (
+        #{id,jdbcType=VARCHAR},
+        #{creditApplyId,jdbcType=VARCHAR},
+        #{channelId,jdbcType=VARCHAR},
+        #{requestUuid,jdbcType=VARCHAR},
+        #{prodId,jdbcType=VARCHAR},
+        #{applyDate,jdbcType=DATE},
+        #{applyType,jdbcType=VARCHAR},
+        #{applyPriority,jdbcType=VARCHAR},
+        #{transDate,jdbcType=DATE},
+        #{transStatus,jdbcType=VARCHAR},
+        #{transResult,jdbcType=VARCHAR},
+        #{requestMessage,jdbcType=CLOB},
+        #{responseMessage,jdbcType=CLOB},
+        #{requestTime,jdbcType=TIMESTAMP},
+        #{responseTime,jdbcType=TIMESTAMP},
+        #{responseStatus,jdbcType=VARCHAR},
+        #{responseDesc,jdbcType=VARCHAR},
+        #{msgId,jdbcType=VARCHAR},
+        #{inqueueTime,jdbcType=TIMESTAMP},
+        #{outqueueTime,jdbcType=TIMESTAMP},
+        #{retryCount,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE CE_INBOUND_JOURNAL SET
+        <if test="creditApplyId != null and creditApplyId != ''">
+        CREDIT_APPLY_ID = #{creditApplyId,jdbcType=VARCHAR},
+        </if>
+        <if test="channelId != null and channelId != ''">
+        CHANNEL_ID = #{channelId,jdbcType=VARCHAR},
+        </if>
+        <if test="requestUuid != null and requestUuid != ''">       
+        REQUEST_UUID = #{requestUuid,jdbcType=VARCHAR},
+        </if>
+        <if test="prodId != null and prodId != ''">
+        PROD_ID = #{prodId,jdbcType=VARCHAR},
+        </if>
+        <if test="applyDate != null">
+        APPLY_DATE = #{applyDate,jdbcType=DATE},
+        </if>
+        <if test="applyType != null and applyType != ''">
+        APPLY_TYPE = #{applyType,jdbcType=VARCHAR},
+        </if>
+        <if test="applyPriority != null and applyPriority != ''">
+        APPLY_PRIORITY = #{applyPriority,jdbcType=VARCHAR},
+        </if>
+        <if test="transDate != null">
+        TRANS_DATE = #{transDate,jdbcType=DATE},
+        </if>
+        <if test="transStatus != null and transStatus != ''">
+        TRANS_STATUS = #{transStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="transResult != null and transResult != ''">
+        TRANS_RESULT = #{transResult,jdbcType=VARCHAR},
+        </if>
+        <if test="requestMessage != null and requestMessage != ''">
+        REQUEST_MESSAGE = #{requestMessage,jdbcType=CLOB},
+        </if>
+        <if test="responseMessage != null and responseMessage != ''">
+        RESPONSE_MESSAGE = #{responseMessage,jdbcType=CLOB},
+        </if>
+        <if test="requestTime != null">
+        REQUEST_TIME = #{requestTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="responseTime != null">
+        RESPONSE_TIME = #{responseTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="responseStatus != null and responseStatus != ''">
+        RESPONSE_STATUS = #{responseStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="responseDesc != null and responseDesc != ''">
+        RESPONSE_DESC = #{responseDesc,jdbcType=VARCHAR},
+        </if>
+        <if test="msgId != null and msgId != ''">
+        MSG_ID = #{msgId,jdbcType=VARCHAR},
+        </if>
+        <if test="inqueueTime != null">
+        INQUEUE_TIME = #{inqueueTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="outqueueTime != null">
+        OUTQUEUE_TIME = #{outqueueTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="retryCount != 0">
+        RETRY_COUNT = #{retryCount,jdbcType=INTEGER},
+        </if>
+        <if test="id != null and id != ''">
+        ID = #{id,jdbcType=VARCHAR}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <!--物理删除-->
+    <update id="delete">
+        DELETE FROM CE_INBOUND_JOURNAL
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+    <select id="findUniqueByProperty" resultType="net.engining.gateway.entity.InboundJournal" statementType="STATEMENT">
+        select * FROM CE_INBOUND_JOURNAL where ${propertyName} = '${value}'
+    </select>
+    
+	<select id="getCreditSeqNo" resultType="java.lang.String">
+        select nextval for SEQ_CREDIT_APPLY_NO from sysibm.sysdummy1
+    </select>
+    
+    <select id="getFlowId" resultType="java.lang.String">
+        select nextval for SEQ_BDP_ASYNC_FLOWID from sysibm.sysdummy1
+    </select>
+    
+    <!-- 获取当日交易总量 -->
+  	<select id="getDaySum" resultType="java.lang.Integer" parameterType="net.engining.gateway.entity.InboundJournal">
+        SELECT COUNT(*) AS "dayTotalSum" FROM CE_INBOUND_JOURNAL a 
+        WHERE 1=1 
+        AND a.TRANS_DATE = #{nowDate}
+    </select>
+    
+  	<!-- 获取本月交易总量 -->
+  	<select id="getMonthSum" resultType="java.lang.Integer" parameterType="net.engining.gateway.entity.InboundJournal">
+        SELECT COUNT(*) AS "monthTotalSum" FROM CE_INBOUND_JOURNAL a 
+        WHERE 1=1 
+        AND a.TRANS_DATE BETWEEN #{beginDate1} AND #{endDate1}
+    </select>
+    
+  	<!-- 获取本年交易总量 -->
+  	<select id="getYearSum" resultType="java.lang.Integer" parameterType="net.engining.gateway.entity.InboundJournal">
+        SELECT COUNT(*) AS "yearTotalSum" FROM CE_INBOUND_JOURNAL a 
+        WHERE 1=1 
+        AND a.TRANS_DATE BETWEEN #{beginDate2} AND #{endDate2}
+    </select>
+    
+    <!-- 根据交易渠道和交易结果获得当日、本月、本年交易量 -->	
+    <select id="getTransSumByType" resultType="net.engining.gateway.entity.InboundJournal" parameterType="net.engining.gateway.entity.InboundJournal">
+        SELECT i.CHANNEL_ID, i.TRANS_STATUS ,a.daySum AS "daySum", b.monthSum as "monthSum",c.yearSum as "yearSum" 
+ 		FROM CE_INBOUND_JOURNAL i
+ 		
+ 		LEFT OUTER JOIN
+		(SELECT	CHANNEL_ID,TRANS_STATUS,COUNT(*) AS daySum
+		FROM	CE_INBOUND_JOURNAL 
+		WHERE TRANS_DATE  = #{nowDate} 
+		GROUP BY CHANNEL_ID, TRANS_STATUS) a
+		ON i.CHANNEL_ID =a.CHANNEL_ID AND i.TRANS_STATUS =a.TRANS_STATUS
+		
+		 LEFT OUTER JOIN
+		(SELECT	CHANNEL_ID,TRANS_STATUS,COUNT(*) AS monthSum
+		FROM	CE_INBOUND_JOURNAL
+		WHERE	TRANS_DATE BETWEEN  #{beginDate1} AND #{endDate1}
+		GROUP BY  CHANNEL_ID,TRANS_STATUS) b 
+		ON i.CHANNEL_ID =b.CHANNEL_ID AND i.TRANS_STATUS =b.TRANS_STATUS
+		
+		 LEFT OUTER JOIN
+		(SELECT	CHANNEL_ID,TRANS_STATUS,COUNT(*) AS yearSum
+		FROM	CE_INBOUND_JOURNAL
+		WHERE   TRANS_DATE  BETWEEN  #{beginDate2} AND #{endDate2}
+		GROUP BY CHANNEL_ID,TRANS_STATUS) c
+		ON i.CHANNEL_ID =c.CHANNEL_ID AND i.TRANS_STATUS =c.TRANS_STATUS
+		
+		GROUP BY i.CHANNEL_ID,i.TRANS_STATUS,a.daySum, b.monthSum ,c.yearSum 
+    </select>
+    
+    <!-- 获取交易时间间隔-->
+    <select id="getTransInterval" resultType="java.util.HashMap" parameterType="net.engining.gateway.entity.InboundJournal">
+        SELECT  a.ID,a.PRODID,a.CREDITAPPLYID,a.ISTT,a.IREQTIME,a.IRESTIME,a.OREQTIME,a.ORESTIME,a.TARGETSYSTEM,a.OSTT,a.JIANGE
+		FROM
+		    (
+		        SELECT
+		            CE_INBOUND_JOURNAL.ID AS "ID",
+		            CE_INBOUND_JOURNAL.PROD_ID AS "PRODID",
+		            CE_INBOUND_JOURNAL.CREDIT_APPLY_ID AS "CREDITAPPLYID",
+		            CE_INBOUND_JOURNAL.TRANS_STATUS   AS "ISTT",
+		            CE_INBOUND_JOURNAL.REQUEST_TIME   AS "IREQTIME",
+		            CE_INBOUND_JOURNAL.RESPONSE_TIME  AS "IRESTIME",
+		            CE_OUTBOUND_JOURNAL.REQUEST_TIME  AS "OREQTIME",
+		            CE_OUTBOUND_JOURNAL.RESPONSE_TIME AS "ORESTIME" ,
+		            CE_OUTBOUND_JOURNAL.TARGET_SYSTEM AS "TARGETSYSTEM",
+		            CE_OUTBOUND_JOURNAL.TRANS_STATUS AS "OSTT",
+		            ((DAYS(CE_OUTBOUND_JOURNAL.RESPONSE_TIME)-DAYS(CE_INBOUND_JOURNAL.REQUEST_TIME))*86400+
+		            (MIDNIGHT_SECONDS(CE_OUTBOUND_JOURNAL.RESPONSE_TIME)-MIDNIGHT_SECONDS
+		            (CE_INBOUND_JOURNAL.REQUEST_TIME))) AS "JIANGE"
+		        FROM
+		            CE_INBOUND_JOURNAL,
+		            CE_OUTBOUND_JOURNAL
+		        WHERE
+		            CE_INBOUND_JOURNAL.ID= CE_OUTBOUND_JOURNAL.INBOUND_ID
+		        <if test="beginDate1 != null and endDate1 != null ">
+		        AND	 CE_INBOUND_JOURNAL.TRANS_DATE BETWEEN  #{beginDate1} AND #{endDate1}
+		        </if>
+		         ) a
+		WHERE 1=1 
+		 	<if test="dayTotalSum != 0 and monthTotalSum != 0">
+		    AND	a.JIANGE BETWEEN  #{dayTotalSum} AND #{monthTotalSum}
+		    </if>
+    </select>
+</mapper>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.engining.gateway.dao.OutboundJournalDao">
+    <sql id="outboundJournalColumns">
+        a.ID AS "id",
+        a.CREDIT_APPLY_ID AS "creditApplyId",
+        a.CHANNEL_ID AS "channelId",
+        a.REQUEST_UUID AS "requestUuid",
+        a.INBOUND_ID AS "inboundId",
+        a.TARGET_SYSTEM AS "targetSystem",
+        a.TRANS_DATE AS "transDate",
+        a.TRANS_STATUS AS "transStatus",
+        a.TRANS_RESULT AS "transResult",
+        a.REQUEST_MESSAGE AS "requestMessage",
+        a.RESPONSE_MESSAGE AS "responseMessage",
+        a.REQUEST_TIME AS "requestTime",
+        a.RESPONSE_TIME AS "responseTime",
+        a.RESPONSE_STATUS AS "responseStatus",
+        a.RESPONSE_DESC AS "responseDesc",
+        a.MSG_ID AS "msgId",
+        a.FLOW_ID AS "flowId",
+        a.INQUEUE_TIME AS "inqueueTime",
+        a.OUTQUEUE_TIME AS "outqueueTime"
+    </sql>
+
+    <sql id="outboundJournalJoins">
+    </sql>
+
+    <select id="get" resultType="net.engining.gateway.entity.OutboundJournal">
+        SELECT
+        <include refid="outboundJournalColumns"/>
+        FROM CE_OUTBOUND_JOURNAL a
+        <include refid="outboundJournalJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="findList" resultType="net.engining.gateway.entity.OutboundJournal">
+        SELECT
+        <include refid="outboundJournalColumns"/>
+        FROM CE_OUTBOUND_JOURNAL a
+        <include refid="outboundJournalJoins"/>  
+    </select>
+
+    <select id="findAllList" resultType="net.engining.gateway.entity.OutboundJournal">
+        SELECT
+        <include refid="outboundJournalColumns"/>
+        FROM CE_OUTBOUND_JOURNAL a
+        <include refid="outboundJournalJoins"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO CE_OUTBOUND_JOURNAL(
+        ID,
+        CREDIT_APPLY_ID,
+        CHANNEL_ID,
+        REQUEST_UUID,
+        PROD_ID,
+        INBOUND_ID,
+        TARGET_SYSTEM,
+        TRANS_DATE,
+        TRANS_STATUS,
+        TRANS_RESULT,
+        REQUEST_MESSAGE,
+        RESPONSE_MESSAGE,
+        REQUEST_TIME,
+        RESPONSE_TIME,
+        RESPONSE_STATUS,
+        RESPONSE_DESC,
+        MSG_ID,
+        FLOW_ID,
+        INQUEUE_TIME,
+        OUTQUEUE_TIME
+        ) VALUES (
+        #{id,jdbcType =VARCHAR},
+        #{creditApplyId,jdbcType =VARCHAR},
+        #{channelId,jdbcType =VARCHAR},
+        #{requestUuid,jdbcType =VARCHAR},
+        #{prodId,jdbcType =VARCHAR},
+        #{inboundId,jdbcType =VARCHAR},
+        #{targetSystem,jdbcType =VARCHAR},
+        #{transDate,jdbcType =DATE},
+        #{transStatus,jdbcType =VARCHAR},
+        #{transResult,jdbcType =VARCHAR},
+        #{requestMessage,jdbcType =CLOB},
+        #{responseMessage,jdbcType =CLOB},
+        #{requestTime,jdbcType =TIMESTAMP},
+        #{responseTime,jdbcType =TIMESTAMP},
+        #{responseStatus,jdbcType =VARCHAR},
+        #{responseDesc,jdbcType =VARCHAR},
+        #{msgId,jdbcType =VARCHAR},
+        #{flowId,jdbcType =VARCHAR},
+        #{inqueueTime,jdbcType =TIMESTAMP},
+        #{outqueueTime,jdbcType =TIMESTAMP}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE CE_OUTBOUND_JOURNAL SET
+        <if test="creditApplyId != null and creditApplyId != ''">
+        CREDIT_APPLY_ID= #{creditApplyId,jdbcType =VARCHAR},
+        </if>
+        <if test="channelId != null and channelId != ''">
+        CHANNEL_ID= #{channelId,jdbcType =VARCHAR},
+        </if>
+        <if test="requestUuid != null and requestUuid != ''">
+        REQUEST_UUID= #{requestUuid,jdbcType =VARCHAR},
+        </if>
+        <if test="prodId != null and prodId != ''">
+        PROD_ID= #{prodId,jdbcType =VARCHAR},
+        </if>
+        <if test="inboundId != null and inboundId != ''">
+        INBOUND_ID= #{inboundId,jdbcType =VARCHAR},
+        </if>
+        <if test="targetSystem != null and targetSystem != ''">
+        TARGET_SYSTEM= #{targetSystem,jdbcType =VARCHAR},
+        </if>
+        <if test="transDate != null">
+        TRANS_DATE= #{transDate,jdbcType =DATE},
+        </if>
+        <if test="transStatus != null and transStatus != ''">
+        TRANS_STATUS= #{transStatus,jdbcType =VARCHAR},
+        </if>
+        <if test="transResult != null and transResult != ''">
+        TRANS_RESULT= #{transResult,jdbcType =VARCHAR},
+        </if>
+        <if test="requestMessage != null and requestMessage != ''">
+        REQUEST_MESSAGE= #{requestMessage,jdbcType =CLOB},
+        </if>
+        <if test="responseMessage != null and responseMessage != ''">
+        RESPONSE_MESSAGE= #{responseMessage,jdbcType =CLOB},
+        </if>
+        <if test="requestTime != null">
+        REQUEST_TIME= #{requestTime,jdbcType =TIMESTAMP},
+        </if>
+        <if test="responseTime != null">
+        RESPONSE_TIME= #{responseTime,jdbcType =TIMESTAMP},
+        </if>
+        <if test="responseStatus != null and responseStatus != ''">
+        RESPONSE_STATUS= #{responseStatus,jdbcType =VARCHAR},
+        </if>
+        <if test="responseDesc != null and responseDesc != ''">
+        RESPONSE_DESC= #{responseDesc,jdbcType =VARCHAR},
+        </if>
+        <if test="msgId != null and msgId != ''">
+        MSG_ID= #{msgId,jdbcType =VARCHAR},
+        </if>
+        <if test="flowId != null and flowId != ''">
+        FLOW_ID= #{flowId,jdbcType =VARCHAR},
+        </if>
+        <if test="inqueueTime != null">
+        INQUEUE_TIME= #{inqueueTime,jdbcType =TIMESTAMP},
+        </if>
+        <if test="outqueueTime != null">
+        OUTQUEUE_TIME= #{outqueueTime,jdbcType =TIMESTAMP},
+        </if>
+        <if test="id != null and id != ''">
+        ID = #{id,jdbcType=VARCHAR}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <!--物理删除-->
+    <update id="delete">
+        DELETE FROM CE_OUTBOUND_JOURNAL
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+    <select id="findUniqueByProperty" resultType="net.engining.gateway.entity.OutboundJournal" statementType="STATEMENT">
+        select * FROM CE_OUTBOUND_JOURNAL where ${propertyName} = '${value}'
+    </select>
+
+	<select id="findListByInBoundId" resultType="net.engining.gateway.entity.OutboundJournal" parameterType="java.lang.String">
+        SELECT
+        <include refid="outboundJournalColumns"/>
+        FROM CE_OUTBOUND_JOURNAL a
+        WHERE a.INBOUND_ID = #{inboundId}
+        ORDER BY ID DESC
+    </select>
+</mapper>
